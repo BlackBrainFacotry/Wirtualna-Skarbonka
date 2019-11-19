@@ -1,0 +1,17 @@
+﻿<Window x:Class="Projekt_1.Ekran_Glowny"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_1"
+        mc:Ignorable="d"
+        Title="Ekran_Glowny" Height="720" Width="1280" Background="Navy" Closed="Window_Closed">
+    <Grid>
+        <Grid HorizontalAlignment="Left" Height="133" Margin="10,570,0,-12.6" VerticalAlignment="Top" Width="1254">
+            <Button x:Name="cele_button1" Content="cele finansowe" HorizontalAlignment="Left" Margin="633,0,0,0" VerticalAlignment="Top" Width="622" Height="108" Click="Oplaty_button_Click"   />
+            <Button x:Name="stan_button" Content="historia operacji" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="622" Height="108"/>
+        </Grid>
+        <Button x:Name="wylog" Content="wyloguj" HorizontalAlignment="Left" Background="Beige" VerticalAlignment="Top" Width="411" Margin="775,-547,0,0" Height="25"/>
+        <DataGrid x:Name="tab_eg" HorizontalAlignment="Left" Height="433" Margin="96,76,0,0" VerticalAlignment="Top" Width="1088" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGrid_Loaded"/>
+    </Grid>
+</Window>

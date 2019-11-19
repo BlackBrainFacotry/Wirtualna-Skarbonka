@@ -1,0 +1,16 @@
+﻿<Window x:Class="Projekt_1.Historia_operacji"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt_1"
+        mc:Ignorable="d"
+            Title="Ekran_Glowny" Height="720" Width="1280" Background="Navy">
+    <Grid Loaded="Grid_Loaded">
+        <Grid HorizontalAlignment="Left" Height="133" Margin="10,570,0,-12.6" VerticalAlignment="Top" Width="1254">
+            <Button x:Name="oplaty_button" Content="nadchodzące opłaty" HorizontalAlignment="Left" Margin="633,0,0,0" VerticalAlignment="Top" Width="622" Height="108" Click="Oplaty_button_Click"/>
+            <Button x:Name="cele_button" Content="Cele finansowe" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="622" Height="108"/>
+        </Grid>
+        <DataGrid x:Name="Stan" HorizontalAlignment="Left" Height="363" Margin="84,110,0,0" VerticalAlignment="Top" Width="1089" SelectionChanged="Stan_SelectionChanged"/>
+    </Grid>
+</Window>
