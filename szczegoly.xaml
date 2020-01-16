@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_1"
         mc:Ignorable="d"
-        Title="szczegoly" Height="450" Width="800">
+         d:DesignHeight="720" d:DesignWidth="1280"
+      Title="Page1" Background="Navy">
+
     <Grid>
-        
+        <Grid HorizontalAlignment="Left" Height="133" Margin="10,570,0,-12.6" VerticalAlignment="Top" Width="1254"/>
+        <DataGrid x:Name="Cel_grid" HorizontalAlignment="Left" Height="611" Margin="61,31,0,0" VerticalAlignment="Top" Width="774" SelectionChanged="DataGrid_SelectionChanged">
+        </DataGrid>
+        <Label x:Name="potrzebna_kwota" Content="Potrzebna Kwota :" HorizontalAlignment="Left" Margin="840,258,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota_Copy" Content="Uzbierana Kwota :" HorizontalAlignment="Left" Margin="840,59,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota_Copy1" Content="tu bedzie ta kwota" HorizontalAlignment="Left" Margin="840,160,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota_Copy2" Content="tu bedzie ta kwota" HorizontalAlignment="Left" Margin="840,362,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota_Copy3" Content="a tu wynik %" HorizontalAlignment="Left" Margin="840,482,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
     </Grid>
 </Window>

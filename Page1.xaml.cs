@@ -155,7 +155,8 @@ namespace Projekt_1
 
         private void Szczegoly_Click(object sender, RoutedEventArgs e)
         {
-
+            Window win = new szczegoly();
+            win.Show();
         }
     }
 

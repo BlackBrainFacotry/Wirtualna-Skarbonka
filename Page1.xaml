@@ -18,7 +18,7 @@
         <Button x:Name="wys_css" Content="utworz plik css"  HorizontalAlignment="Left" Height="73" Margin="894,31,0,0" VerticalAlignment="Top" Width="351" FontSize="24" FontWeight="Bold"/>
         <Button Content="Odświerz" x:Name="Odśwież_tabele" HorizontalAlignment="Left" Height="73" Margin="894,247,0,0" VerticalAlignment="Top" Width="351" FontSize="24" FontWeight="Bold" Click="Odśwież_tabele_Click"/>
         <Button x:Name="wys_exel" Content="utworz exel" HorizontalAlignment="Left" Height="73" Margin="894,137,0,0" VerticalAlignment="Top" Width="351" FontSize="24" FontWeight="Bold"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="73" VerticalAlignment="Top" Width="351" RenderTransformOrigin="0.506,1.184" Margin="896,357,0,0" FontSize="24" FontWeight="Bold"/>
+        <Button x:Name="Szczegoly" Content="Szczegoly" HorizontalAlignment="Left" Height="73" VerticalAlignment="Top" Width="351" RenderTransformOrigin="0.506,1.184" Margin="896,357,0,0" FontSize="24" FontWeight="Bold" Click="Szczegoly_Click"/>
         <Button x:Name="Dodaj" Content="Dodaj" HorizontalAlignment="Left" Margin="894,476,0,0" VerticalAlignment="Top" Width="349" Height="69" FontSize="24" FontWeight="Bold" Click="Dodaj_Click"/>
         <Grid HorizontalAlignment="Left" Height="555" Margin="874,10,0,0" VerticalAlignment="Top" Width="390"/>
         <Grid HorizontalAlignment="Left" Height="73" Margin="61,472,0,0" VerticalAlignment="Top" Width="790">
