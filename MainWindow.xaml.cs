@@ -30,13 +30,13 @@ namespace Projekt_1
         public MainWindow()
         {
             InitializeComponent();
-            disp_timer.Interval = TimeSpan.FromSeconds(5);
+            disp_timer.Interval = TimeSpan.FromSeconds(2);
             disp_timer.Tick += Disp_timer_Tick;
         }
 
         private void Disp_timer_Tick(object sender, EventArgs e)
         {
-            //this.Close();
+            this.Close();
             //Application.Current.Shutdown();
            
         }
@@ -103,6 +103,16 @@ namespace Projekt_1
 
             this.Visibility = Visibility.Hidden;
             rej001.ref_ekran_glowny(this);
+
+        }
+
+        public void start_dips_timer()
+        {
+            disp_timer.Start();
+            if (rej001 != null)
+            {
+                rej001.Close();
+            }
 
         }
 

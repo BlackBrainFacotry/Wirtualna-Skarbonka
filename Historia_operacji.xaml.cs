@@ -19,10 +19,13 @@ namespace Projekt_1
     /// </summary>
     public partial class Historia_operacji : Window
     {
+
+
         private List<RecStan> lista = new List<RecStan>();
         Ekran_Glowny scr;
         public Historia_operacji()
         {
+           
             InitializeComponent();
         }
 

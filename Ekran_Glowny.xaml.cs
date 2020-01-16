@@ -11,9 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Projekt_1
 {
+
     /// <summary>
     /// Logika interakcji dla klasy Ekran_Glowny.xaml
     /// </summary>
@@ -22,10 +25,21 @@ namespace Projekt_1
         private List<Rekord> list = new List<Rekord>();
 
         MainWindow logo;
+
+        public Page1 page1 = new Page1();
+        public Page2 page2 = new Page2();
+        public Page3 page3 = new Page3();
+
+        /// <summary>
         
+        /// </summary>
+
         public Ekran_Glowny()
         {
+            //Window war = (Ekran_Glowny)Window.;
             InitializeComponent();
+            this.Content = page1;
+            page1.Get_data();
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -33,22 +47,16 @@ namespace Projekt_1
 
         }
 
-        private void DataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            Rekord red = new Rekord();                        ///inicjalizowanie tabelki
-            red.data = DateTime.Now;
-            red.kwota = 998989;
-            red.tytul = "tytutytu";
-
-            list.Add(red);
-
-            this.tab_eg.ItemsSource = null;
-            this.tab_eg.ItemsSource = list;
-        }
 
         private void Oplaty_button_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            SqlConnection connection = new SqlConnection(Properties.Settings.Default.constr);
+
+            connection.Open();
+
+            SqlCommand sqlCommand = connection.CreateCommand();
+
 
         }
         public void ref_ekran_glowny(MainWindow ekran)
@@ -58,9 +66,13 @@ namespace Projekt_1
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            
-            this.logo.show_again();
+
+
+            // logo.Close();
+            logo.start_dips_timer();
+
         }
+      
     }
     class Rekord
     {

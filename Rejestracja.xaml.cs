@@ -20,6 +20,7 @@ namespace Projekt_1
     public partial class Rejestracja : Window
     {
         MainWindow ark;
+        Ekran_Glowny rej001;
 
         public Rejestracja()
         {
@@ -113,6 +114,25 @@ namespace Projekt_1
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (rej001 == null)
+            {
+                rej001 = new Ekran_Glowny();
+                rej001.Show();
+                rej001.ref_ekran_glowny(ark);
+            }
+            else
+            {
+                if (rej001 != null)
+                    rej001.Close();
+
+                rej001 = new Ekran_Glowny();
+                rej001.Show();
+                //rej001.ref_ekran_glowny(this);
+            }
+
+            this.Close();
+            
+
 
         }
 

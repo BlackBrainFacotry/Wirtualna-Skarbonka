@@ -12,6 +12,5 @@
             <Button x:Name="stan_button" Content="historia operacji" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="622" Height="108"/>
         </Grid>
         <Button x:Name="wylog" Content="wyloguj" HorizontalAlignment="Left" Background="Beige" VerticalAlignment="Top" Width="411" Margin="775,-547,0,0" Height="25"/>
-        <DataGrid x:Name="tab_eg" HorizontalAlignment="Left" Height="433" Margin="96,76,0,0" VerticalAlignment="Top" Width="1088" SelectionChanged="DataGrid_SelectionChanged" Loaded="DataGrid_Loaded"/>
-    </Grid>
+        </Grid>
 </Window>
