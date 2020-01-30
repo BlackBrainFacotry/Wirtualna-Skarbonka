@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.Sql;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -114,28 +116,55 @@ namespace Projekt_1
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (rej001 == null)
-            {
-                rej001 = new Ekran_Glowny();
-                rej001.Show();
-                rej001.ref_ekran_glowny(ark);
-            }
-            else
-            {
-                if (rej001 != null)
-                    rej001.Close();
+            string username = username_txt.Text;
+            string password = password_txt.Text;
+            string telefon = telefon_txt.Text;
+            string owoc = owoc_txt.Text;
+            RegisterUser(username, password,telefon,owoc);
+            //if (rej001 == null)
+            //{
+            //    rej001 = new Ekran_Glowny();
+            //    rej001.Show();
+            //    rej001.ref_ekran_glowny(ark);
+            //}
+            //else
+            //{
+            //    if (rej001 != null)
+            //        rej001.Close();
 
-                rej001 = new Ekran_Glowny();
-                rej001.Show();
-                //rej001.ref_ekran_glowny(this);
-            }
+            //    rej001 = new Ekran_Glowny();
+            //    rej001.Show();
+            //    //rej001.ref_ekran_glowny(this);
+            //}
 
-            this.Close();
-            
+            //this.Close();
+
 
 
         }
-
+        private void RegisterUser(string login, string haslo, string telefon, string owoc)
+        {
+            SqlCommand comm = new SqlCommand();
+            SqlConnection conn = new SqlConnection(Properties.Settings.Default.constr);
+            using(conn)
+            {
+                comm.CommandText = "INSERT INTO Users (login, password, telefon, owoc) VALUES (@login, @password, @telefon, @owoc);";
+                comm.Parameters.AddWithValue("@login", login);
+                comm.Parameters.AddWithValue("@password", haslo);
+                comm.Parameters.AddWithValue("@telefon", telefon);
+                comm.Parameters.AddWithValue("@owoc", owoc);
+                using(comm)
+                {
+                    conn.Open();
+                    comm.Connection = conn;
+                    int ExecuteResult = comm.ExecuteNonQuery();
+                    if(ExecuteResult >= 0)
+                    {
+                        MessageBox.Show("Zarejestrowanie poprawnie.");
+                    }
+                }
+            }
+        }
         public void pass_reference(MainWindow myWindow)
         {
             ark = myWindow;

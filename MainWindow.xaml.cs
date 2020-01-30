@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.Sql;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,7 @@ namespace Projekt_1
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
     /// 
+
     public partial class MainWindow : Window
     {
         Rejestracja rej000;
@@ -26,7 +29,7 @@ namespace Projekt_1
 
         System.Windows.Threading.DispatcherTimer disp_timer = new System.Windows.Threading.DispatcherTimer();
 
-      
+        public int user_id {get;set;}
         public MainWindow()
         {
             InitializeComponent();
@@ -38,14 +41,13 @@ namespace Projekt_1
         {
             this.Close();
             //Application.Current.Shutdown();
-           
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-        }
 
+        }
         private void password(object sender, TextChangedEventArgs e)
         {
             string pass = this.password_txt.Text;
@@ -58,7 +60,7 @@ namespace Projekt_1
             {
                 login_error.Visibility = Visibility.Hidden;
             }
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) //rejestracja
@@ -70,7 +72,7 @@ namespace Projekt_1
             }
             else
             {
-                if(rej000 != null)
+                if (rej000 != null)
                     rej000.Close();
 
                 rej000 = new Rejestracja();
@@ -80,32 +82,79 @@ namespace Projekt_1
 
             this.Visibility = Visibility.Hidden;
             rej000.pass_reference(this);
-           
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e) //logowanie
         {
-            //new Historia_operacji().Show();
-            if (rej001 == null)
+            string login = login_txt.Text;
+            string password = password_txt.Text;
+            if(LoginCheck(login, password))
             {
-                rej001 = new Ekran_Glowny();
-                rej001.Show();
+
+                //new Historia_operacji().Show();
+                if (rej001 == null)
+                {
+                    rej001 = new Ekran_Glowny();
+                    rej001.Show();
+                }
+                else
+                {
+                    if (rej001 != null)
+                        rej001.Close();
+
+                    rej001 = new Ekran_Glowny();
+                    rej001.Show();
+                    //rej001.ref_ekran_glowny(this);
+                }
+
+                this.Visibility = Visibility.Hidden;
+                rej001.ref_ekran_glowny(this);
             }
             else
             {
-                if (rej001 != null)
-                    rej001.Close();
-
-                rej001 = new Ekran_Glowny();
-                rej001.Show();
-                //rej001.ref_ekran_glowny(this);
+                MessageBox.Show("");
             }
 
-            this.Visibility = Visibility.Hidden;
-            rej001.ref_ekran_glowny(this);
-
         }
-
+        private bool LoginCheck(string login, string password)
+        {
+            SqlCommand comm = new SqlCommand();
+            int IdZBazy = 0;
+            SqlConnection conn = new SqlConnection(Properties.Settings.Default.constr);
+                using(conn)
+            {
+                conn.Open();
+                comm.CommandText = "SELECT id, password FROM Users WHERE login = @login";
+                comm.Parameters.AddWithValue("@login" , login);
+                comm.Connection = conn;
+                SqlDataReader reader = comm.ExecuteReader();
+                string PasswordZBazy = String.Empty;
+                
+                if(reader.HasRows)
+                {
+                    while(reader.Read())
+                    {
+                        PasswordZBazy = reader["password"].ToString();
+                        IdZBazy = Convert.ToInt32(reader["id"]);
+                        break;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+                if(PasswordZBazy == password)
+                {
+                    user_id = IdZBazy;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public void start_dips_timer()
         {
             disp_timer.Start();

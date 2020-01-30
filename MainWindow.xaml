@@ -12,7 +12,7 @@
         <Label Content="Password" HorizontalAlignment="Left" Height="40" Margin="24,114,0,0" VerticalAlignment="Top" Width="128"  FontFamily="Segoe UI Black" FontSize="18"/>
         <TextBox x:Name="password_txt" HorizontalAlignment="Left" Height="40" Margin="195,114,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="200" TextChanged="password" FontSize="20"/>
         <Button Content="Rejestracja" HorizontalAlignment="Left" Margin="24,197,0,0" VerticalAlignment="Top" Width="128" Height="40" Click="Button_Click" FontFamily="Segoe UI Black"/>
-        <Button Content="logowanie" HorizontalAlignment="Left" Margin="195,197,0,0" VerticalAlignment="Top" Width="200" Height="40" Click="Button_Click_1" FontFamily="Segoe UI Black"/>
+        <Button IsDefault="True"  Content="logowanie" HorizontalAlignment="Left" Margin="195,197,0,0" VerticalAlignment="Top" Width="200" Height="40" Click="Button_Click_1" FontFamily="Segoe UI Black"/>
         <Label x:Name="login_error" Content="Nieprawidłowy login!" HorizontalAlignment="Left" Margin="195,84,0,0" VerticalAlignment="Top" Width="200" Visibility="Hidden"/>
         <Label x:Name="password_error" Content="Nieprawidłowe hasło!" HorizontalAlignment="Left" Margin="195,154,0,0" VerticalAlignment="Top" Width="200" Visibility="Hidden"/>
 

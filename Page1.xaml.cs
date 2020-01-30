@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace Projekt_1
      
     public partial class Page1 : Page
     {
+        string temat;
+        public int user_id { get; set; }
+        public int id { get; set; }
         public Page1()
         {
             InitializeComponent();
@@ -44,47 +48,61 @@ namespace Projekt_1
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            DataGrid gd = (DataGrid)sender;
+            DataRowView row_selected = gd.SelectedItem as DataRowView;
+            if (row_selected != null)
+            {
+                temat = row_selected["tytul"].ToString();
+               // MessageBox.Show(temat );
+            }
         }
 
         public void Get_data()
         {
-            List<rec_cel_grid> list = new List<rec_cel_grid>();
+          //  List<rec_cel_grid> list = new List<rec_cel_grid>();
 
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.constr);
-
+            Cel_grid.ItemsSource = null;
             try
             {
                 connection.Open();
 
                 SqlCommand sqlcmd = connection.CreateCommand();
-                sqlcmd.CommandText = "select cel_temat,cel_kwota,cel_opis from projekt where 1=1";
+                sqlcmd.CommandText = "select distinct tytul,kwota ,opis  from Dane where id_user=@id and kwota is not null";
+                sqlcmd.Parameters.AddWithValue("@id", user_id);
+                SqlDataAdapter adapter = new SqlDataAdapter(sqlcmd);
 
-                SqlDataReader rd = sqlcmd.ExecuteReader();
-                while(rd.Read())
-                {
-                    rec_cel_grid nr = new rec_cel_grid();
-                    nr.cel_temat = rd["cel_temat"].ToString();
-                    string pars = rd["cel_kwota"].ToString();
-                    nr.cel_kwota = float.Parse(pars);
-                    nr.cel_opis = rd["cel_opis"].ToString();
+                DataTable dt = new DataTable("Dane");
+                adapter.Fill(dt);
+                Cel_grid.ItemsSource = dt.DefaultView;
 
-                    list.Add(nr);
 
-                }
 
-                rd.Close();
+                //SqlDataReader rd = sqlcmd.ExecuteReader();
+                //while(rd.Read())
+                //{
+                //    rec_cel_grid nr = new rec_cel_grid();
+                //    nr.cel_temat = rd["tytul"].ToString();
+                //    string pars = rd["kwota"].ToString();
+                //    nr.cel_kwota = float.Parse(pars);
+                //    nr.cel_opis = rd["opis"].ToString();
+
+                //    list.Add(nr);
+
+                //}
+
+                //rd.Close();
 
                 connection.Close();
                 connection.Dispose();
 
-                this.Cel_grid.ItemsSource = null;
-                this.Cel_grid.ItemsSource = list;
+              //  this.Cel_grid.ItemsSource = null;
+              //  this.Cel_grid.ItemsSource = list;
 
             }
             catch(Exception exc)
             {
-
+                MessageBox.Show("blad : "+ exc);
             }
 
 
@@ -100,70 +118,113 @@ namespace Projekt_1
         {
             SqlConnection connection2 = new SqlConnection(Properties.Settings.Default.constr);
 
-         /*   try
+            string op, tyt, kwot;
+            tyt = tytuł.Text;
+            op = opis.Text;
+            kwot = kwota.Text;
+            float kwot2 = float.Parse(kwot);
+
+            try
             {
                 connection2.Open();
                 SqlCommand comm = connection2.CreateCommand();
-                comm.CommandText = "insert into projekt (cel_temat,cel_kwota,cel_opis) VALUES (@a,@b,@c)";
-                comm.Parameters.AddWithValue("@a", tytul1);
-                comm.Parameters.AddWithValue("@b", kwota);
-                comm.Parameters.AddWithValue("@c", opis);
+                comm.CommandText = "insert into Dane (tytul, id_user, kwota,opis) VALUES (@a, @id_user,@b,@c)";
+                comm.Parameters.AddWithValue("@a", tyt);
+                comm.Parameters.AddWithValue("@id_user", user_id);
+                comm.Parameters.AddWithValue("@b", kwot2);
+                comm.Parameters.AddWithValue("@c", op);
 
                 int recordsAffected = comm.ExecuteNonQuery();
-
+          
                 connection2.Close();
                 connection2.Dispose();
                 this.Get_data();
 
             }
-            catch
+            catch(Exception ex)
             {
-
+                MessageBox.Show("blad : " + ex);
             }
-            */
+            
         }
 
-        private void Tytuł_TextChanged(object sender, TextChangedEventArgs tytul1)
-        {
-
-        }
-
-        private void Kwota_TextChanged(object sender, TextChangedEventArgs kwota1)
-        {
-
-        }
-
-        private void Opis_TextChanged(object sender, TextChangedEventArgs opis1)
-        {
-
-        }
-
-        private void Tytuł_TextInput(object sender, TextCompositionEventArgs tytul2)
-        {
-            string tytul = tytul2.ToString();
-        }
-
-        private void Kwota_TextInput(object sender, TextCompositionEventArgs kwota2)
-        {
-            //float kwota = float.Parse(kwota2);
-        }
-
-        private void Opis_TextInput(object sender, TextCompositionEventArgs opis2)
-        {
-            string opis = opis2.ToString();
-        }
+       
 
         private void Szczegoly_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new szczegoly();
+            
+         
+            Window win = new szczegoly(user_id,temat);
+         
             win.Show();
+        }
+
+        private void Opis_TextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            user_id = ((MainWindow)App.Current.MainWindow).user_id;
+            MessageBox.Show(user_id.ToString());
+        }
+
+        private void Cel_grid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            id = Cel_grid.SelectedIndex;
+            // MessageBox.Show(id.ToString());
+           
+        }
+
+        private void Dodaj_kwote_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection connection2 = new SqlConnection(Properties.Settings.Default.constr);
+
+            string kstr; 
+            kstr = dodaj_kwote_txt.Text;
+            decimal krk;
+            
+            try
+            {
+                
+                krk = Convert.ToDecimal(kstr);
+             DateTime localDate = DateTime.Now;
+                string format = "yyyy-MM-dd HH:mm:ss";
+                try
+                {
+                    connection2.Open();
+                    SqlCommand comm = connection2.CreateCommand();
+                    comm.CommandText = "insert into Dane (tytul, dod_kwot, id_user, data) VALUES (@a,@b,@c,@d)";
+                    comm.Parameters.AddWithValue("@a", temat);
+                    comm.Parameters.AddWithValue("@c", user_id);
+                    comm.Parameters.AddWithValue("@b", krk);
+                   comm.Parameters.AddWithValue("@d", localDate.ToString(format));
+
+                    int recordsAffected = comm.ExecuteNonQuery();
+
+                    connection2.Close();
+                    connection2.Dispose();
+                    this.Get_data();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("blad : " + ex);
+                }
+            }
+            catch
+            {
+             
+            }
         }
     }
 
     public class rec_cel_grid
     {
+        //public int user_id { get; set; }
         public string cel_temat { get; set; }
-        public float cel_kwota { get; set; }
+        public decimal cel_kwota { get; set; }
         public string cel_opis { get; set; }
     }
 }

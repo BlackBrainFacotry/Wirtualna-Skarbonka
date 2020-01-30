@@ -5,17 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projekt_1"
         mc:Ignorable="d"
-         d:DesignHeight="720" d:DesignWidth="1280"
-      Title="Page1" Background="Navy">
+         d:DesignHeight="720" d:DesignWidth="1260"
+      Title="Page1"  Background="GhostWhite">
 
     <Grid>
         <Grid HorizontalAlignment="Left" Height="133" Margin="10,570,0,-12.6" VerticalAlignment="Top" Width="1254"/>
-        <DataGrid x:Name="Cel_grid" HorizontalAlignment="Left" Height="611" Margin="61,31,0,0" VerticalAlignment="Top" Width="774" SelectionChanged="DataGrid_SelectionChanged">
+        <DataGrid x:Name="Cel_grid" HorizontalAlignment="Left" Height="399" Margin="50,41,0,0" VerticalAlignment="Top" Width="790" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" IsReadOnly="True" Binding="{Binding Id}" Width="0" MaxWidth="0" Header="Ukonczono?">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding tytul}" Width="200" MaxWidth="200" Header="Temat">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding dod_kwot}" Width="300" MaxWidth="300" Header="Kwota Wplacona">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding data}" Width="290" MaxWidth="290" Header="Data">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Ukonczono" />
+                    <MenuItem Header="Nieudane" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
         </DataGrid>
-        <Label x:Name="potrzebna_kwota" Content="Potrzebna Kwota :" HorizontalAlignment="Left" Margin="840,258,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
-        <Label x:Name="potrzebna_kwota_Copy" Content="Uzbierana Kwota :" HorizontalAlignment="Left" Margin="840,59,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
-        <Label x:Name="potrzebna_kwota_Copy1" Content="tu bedzie ta kwota" HorizontalAlignment="Left" Margin="840,160,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
-        <Label x:Name="potrzebna_kwota_Copy2" Content="tu bedzie ta kwota" HorizontalAlignment="Left" Margin="840,362,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
-        <Label x:Name="potrzebna_kwota_Copy3" Content="a tu wynik %" HorizontalAlignment="Left" Margin="840,482,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontFamily="Showcard Gothic" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota" Content="Potrzebna Kwota :" HorizontalAlignment="Left" Margin="840,258,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontSize="36" IsEnabled="False"/>
+        <Label x:Name="potrzebna_kwota_Copy" Content="Uzbierana Kwota :" HorizontalAlignment="Center" Margin="840,59,0,0" VerticalAlignment="Top" Width="424" Height="61" FontWeight="Bold" FontSize="36" IsEnabled="False"/>
+        <TextBox  x:Name="textbox1" HorizontalAlignment="Left" Height="63" Margin="845,144,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
+        <TextBox  x:Name="textbox2"  HorizontalAlignment="Left" Height="71" Margin="845,342,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365"/>
     </Grid>
 </Window>
