@@ -33,18 +33,7 @@ namespace Projekt_1
             InitializeComponent();
         }
 
-        private void Stan_button_Click(object sender, RoutedEventArgs e)
-        {
-
-            ((Ekran_Glowny)this.Parent).Content = ((Ekran_Glowny)this.Parent).page2;
-           // ((Ekran_Glowny)this.Parent).Content = NavigationService.Navigate(((Ekran_Glowny)this.Parent).page2);
-
-        }
-
-        private void Oplaty_button_Click(object sender, RoutedEventArgs e)
-        {
-            ((Ekran_Glowny)this.Parent).Content = ((Ekran_Glowny)this.Parent).page3;
-        }
+        
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

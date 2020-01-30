@@ -27,8 +27,7 @@ namespace Projekt_1
         MainWindow logo;
 
         public Page1 page1 = new Page1();
-        public Page2 page2 = new Page2();
-        public Page3 page3 = new Page3();
+      
 
         /// <summary>
         
